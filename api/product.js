@@ -17,10 +17,16 @@ const studentSchema = new mongoose.Schema({
 })
 const Student = new mongoose.model('photos', studentSchema);
 const Studentapi = new mongoose.model('posts', studentSchema);
-router.get('/', (req,res) => {
-    Student.find({}, (err, docs)=> {
+router.get('/', async (req,res) => {
+    try {
+         Student.find({}, (err, docs)=> {
        res.json(docs)
    })
+    } catch (error) {
+        console.error(error)
+        return res.status(500).send("server error")
+    }
+   
 
 })
 // router.get("/", async (req, res) => {
